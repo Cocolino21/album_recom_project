@@ -3,8 +3,7 @@ package com.mihnea.album_recom_api.dto;
 import lombok.Data;
 
 @Data
-public class RegistrationDto {
+public class LoginDto {
     private String username;
     private String password;
-    private String email;
 }

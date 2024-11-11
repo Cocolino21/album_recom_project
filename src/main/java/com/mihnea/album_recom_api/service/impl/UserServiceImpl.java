@@ -7,6 +7,7 @@ import com.mihnea.album_recom_api.model.User;
 import com.mihnea.album_recom_api.repository.UserRepository;
 import com.mihnea.album_recom_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -15,10 +16,13 @@ public class UserServiceImpl implements UserService {
 
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserRepository userRepository1) {
-        this.userRepository = userRepository1;
+    public UserServiceImpl(UserRepository userRepository,PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+
     }
     @Override
     public void registerUser(RegistrationDto registrationDto) {
@@ -34,7 +38,7 @@ public class UserServiceImpl implements UserService {
     private User mapToUser(RegistrationDto registrationDto) {
         User user = new User();
         user.setUsername(registrationDto.getUsername());
-        user.setPassword(registrationDto.getPassword());
+        user.setPassword(passwordEncoder.encode(registrationDto.getPassword()));
         user.setEmail(registrationDto.getEmail());
         return user;
     }

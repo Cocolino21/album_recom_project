@@ -18,5 +18,6 @@ public class ArtistDto {
     private Integer artistAge;
     private Set<Album> artistAlbums = new HashSet<>();
     private Set<Song> artistSongs = new HashSet<>();
+    
 
 }
